@@ -12,7 +12,6 @@
 
 import { faker, es, fakerES_MX } from '@faker-js/faker'
 import { getCheckDigit, format } from 'rut.js'
-const fs = import('fs')
 import moment from 'moment'
 
 import { Persona, Ciudad } from './funciones/funciones.js'
@@ -26,15 +25,15 @@ function genRut(){
     var min = 1_000_000
     var max = 29_999_999
 
-    return Math.floor(Math.random() * (max - min + 1) + min)
+    return (Math.floor(Math.random() * (max - min + 1) + min)).toString()
 }
 function genDV(rut){
-    var dv = 1//getCheckDigit(rut)
+    var dv = getCheckDigit(rut)
     return dv
 }
 
 function generarFaker(){
-    var rutGen = genRut() +'-'+genDV(rutGen)
+    var rutGen = genRut() +'-'+ genDV(genRut())
     var fecha_nacimiento = faker.date.birthdate()
     var fecha_hoy = moment()
     var edad = moment(fecha_hoy).diff(fecha_nacimiento,'years')
@@ -48,15 +47,6 @@ function generarFaker(){
     var ciudad = fakerES_MX.location.city()
 
     listPersonas.push( new Persona(id,rut,nombre,apellido,nacimiento,edad,ciudad) )
-}
-
-function crearPersonas(maximo){
-    for(let i = 1; i<=maximo; i++){
-        generarFaker()
-        
-    }
-    listarPersonas(listPersonas)
-    personasPorCiudad(listPersonas)
 }
 
 function listarPersonas(arrayobjpersona){
@@ -87,6 +77,16 @@ function personasPorCiudad(personas){
             listCiudades.push(ciudad)
         }
     }
+}
+
+/* this is alpha */
+function crearPersonas(maximo){
+    for(let i = 1; i<=maximo; i++){
+        generarFaker()
+        
+    }
+    listarPersonas(listPersonas)
+    personasPorCiudad(listPersonas)
 }
 
 crearPersonas(4)
