@@ -1,0 +1,29 @@
+{
+  "name": "actsab_mod06s05",
+  "version": "1.0.0",
+  "description": "actividad practica del dia sabado",
+  "main": "src/personas_fake.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZrkllT/ActSab_Mod06S05.git"
+  },
+  "author": "Álvaro Cerda",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZrkllT/ActSab_Mod06S05/issues"
+  },
+  "homepage": "https://github.com/ZrkllT/ActSab_Mod06S05#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^8.0.2",
+    "moment": "^2.29.4",
+    "rut.js": "^2.1.0",
+    "rutjs": "^0.1.1"
+  }
+}
