@@ -1,4 +1,4 @@
-import { faker, es, fakerES_MX } from '@faker-js/faker'
+import { faker, fakerES_MX } from '@faker-js/faker'
 import { getCheckDigit, format } from 'rut.js'
 import moment from 'moment'
 
@@ -23,27 +23,30 @@ function generarFaker(){
     var rutGen = genRut()
     var fecha_nacimiento = faker.date.birthdate()
     var fecha_hoy = moment()
-    var edad = moment(fecha_hoy).diff(fecha_nacimiento,'years')
+    var edadCalc = moment(fecha_hoy).diff(fecha_nacimiento,'years')
+    var sexoCalc = faker.person.sex()
 
     var id = faker.string.uuid()
     var rut = format(rutGen)
-    var nombre = faker.person.firstName()
+    var nombre = faker.person.firstName(sexoCalc)
     var apellido = faker.person.lastName()
     var nacimiento = moment(fecha_nacimiento).format('DD-MM-YYYY')
-    var edad = edad
+    var sexo = sexoCalc
+    var edad = edadCalc
     var ciudad = fakerES_MX.location.city()
 
-    listPersonas.push( new Persona(id,rut,nombre,apellido,nacimiento,edad,ciudad) )
+    listPersonas.push( new Persona(id,rut,nombre,apellido,nacimiento,sexo,edad,ciudad) )
 }
 
 function listarPersonas(arrayobjpersona){
     arrayobjpersona.forEach((index)=>{
 
-        const { id,rut,nombre,apellido,nacimiento,edad,ciudad } = index
+        const { id,rut,nombre,apellido,nacimiento,sexo,edad,ciudad } = index
         let info = `Id: ${id}\n`
         info += `Nombre: ${nombre} ${apellido}\n`
         info += `Rut: ${rut}\n`
         info += `Fecha Nacimiento: ${nacimiento}\n`
+        info += `Sexo: ${sexo}\n`
         info += `Edad: ${edad} Años\n`
         info += `Domicilio: ${ciudad}\n`
         info += `==================================\n`
@@ -53,28 +56,33 @@ function listarPersonas(arrayobjpersona){
     })
 }
 
+const personasPorCiudad = (ciudadPersona) =>{
+    ciudadPersona.forEach(item =>{
+        let ciudad = item.ciudad
 
-function personasPorCiudad(personas){
-    var nroPersonas = 0
-    for(const item of personas){
-        var { ciudad } = item
-        if(listCiudades.includes(ciudad)){
-            nroPersonas += 1
+        if(!Ciudad[ciudad]){
+            Ciudad[ciudad] = 1
         }else{
-            listCiudades.push(ciudad)
+            Ciudad[ciudad] += 1
         }
-    }
+    })
+    Object.keys(Ciudad).forEach(cityItem =>{
+        console.log(`En ${cityItem} viven ${Ciudad[cityItem]} personas`)
+    })
+}
+
+
+function personasPorSexo(personas){
 }
 
 /* this is alpha */
 function crearPersonas(maximo){
     for(let i = 1; i<=maximo; i++){
         generarFaker()
-        
     }
     listarPersonas(listPersonas)
     personasPorCiudad(listPersonas)
 }
 
-crearPersonas(4)
+crearPersonas(20)
 //console.log(listCiudades)
