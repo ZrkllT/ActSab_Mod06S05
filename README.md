@@ -1,6 +1,6 @@
 # ActSab_Mod06S05
 
-1- Crear repositorio remoto con Readme y gitignore incluido.
+1- Crear repositorio remoto con Readme y gitignore incluido.\n
 2- Clonar proyecto en su entorno local.
 3- intalar la extensión faker. https://fakerjs.dev/guide/
 4- Dentro de una función crear un ciclo que genere 10 personas aleatorias utilizando Faker. Se debe calcular la edad de cada persona. (Id, Nombre, Apellido, Fecha Nacimiento, Ciudad)
