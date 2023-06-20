@@ -18,9 +18,22 @@ export class Persona{
 export class Ciudad{
     constructor(nombre){
         this.nombre = nombre
-        this.personas = 0
-        this.updTotal = function(i){
-            this.personas += Number(i)
-        }
     }
 }
+
+export class Sexo{
+    constructo(tipo){
+        this.tipo = tipo
+    }
+}
+
+
+/*
+const getChileanCity = () => {
+
+    const cities = ['Arica', 'Iquique', 'Antofagasta', 'Copiapó', 'La Serena', 'Valparaíso', 'Rancagua', 'Talca', 'Concepción', 'Temuco', 'Valdivia', 'Puerto Montt', 'Coyhaique', 'Punta Arenas']
+
+    return cities[Math.floor(Math.random() * cities.length)]
+
+}
+*/

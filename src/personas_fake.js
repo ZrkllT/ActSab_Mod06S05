@@ -2,7 +2,7 @@ import { faker, fakerES_MX } from '@faker-js/faker'
 import { getCheckDigit, format } from 'rut.js'
 import moment from 'moment'
 
-import { Persona, Ciudad } from './funciones/funciones.js'
+import { Persona, Ciudad, Sexo } from './funciones/funciones.js'
 
 
 var listPersonas = []
@@ -72,7 +72,28 @@ const personasPorCiudad = (ciudadPersona) =>{
 }
 
 
-function personasPorSexo(personas){
+const personasPorSexo = (sexoPersona) =>{
+    sexoPersona.forEach(item =>{
+        let sexoP = item.sexo
+
+        if(!Sexo[sexoP]){
+            Sexo[sexoP] = 1
+        }else{
+            Sexo[sexoP] += 1
+        }
+    })
+    Object.keys(Sexo).forEach(sexItem =>{
+        console.log(`Se generaron ${Sexo[sexItem]} personas de Sexo ${sexItem}`)
+    })
+}
+
+const promedioEdadPersona = (promPersona,totPersona) =>{
+    let edad_total = 0
+    promPersona.forEach(item =>{
+        edad_total += item.edad
+    })
+    edad_total = edad_total / totPersona
+    console.log(`El promedio de Edad de las ${totPersona} personas es ${edad_total} años`)
 }
 
 /* this is alpha */
@@ -82,7 +103,11 @@ function crearPersonas(maximo){
     }
     listarPersonas(listPersonas)
     personasPorCiudad(listPersonas)
+    console.log(`++++++++++++++++++++++++++++++++++\n`)
+    personasPorSexo(listPersonas)
+    console.log(`**********************************\n`)
+    promedioEdadPersona(listPersonas,maximo)
 }
 
-crearPersonas(20)
+crearPersonas(3)
 //console.log(listCiudades)
