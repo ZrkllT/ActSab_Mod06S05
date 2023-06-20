@@ -66,7 +66,7 @@ const personasPorCiudad = (ciudadPersona) =>{
             Ciudad[ciudad] += 1
         }
     })
-    Object.keys(Ciudad).forEach(cityItem =>{
+    Object.keys(Ciudad).sort().forEach(cityItem =>{
         console.log(`En ${cityItem} viven ${Ciudad[cityItem]} personas`)
     })
 }
@@ -109,5 +109,5 @@ function crearPersonas(maximo){
     promedioEdadPersona(listPersonas,maximo)
 }
 
-crearPersonas(3)
+crearPersonas(33)
 //console.log(listCiudades)
